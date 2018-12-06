@@ -1,27 +1,61 @@
 # InstantSearch
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
+# source URL: https://youtu.be/aYurQaN3RoE
+# title: Angular and RxJS by Stephen Fluin
+# use 'https://reqres.in/api/users?page=2' simulate restful url until get github account crudential for 'https://api.github.com/search/repositories?g=${term}&sort=stars&order=desc'
+# role based application 
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## related real time search https://alligator.io/angular/real-time-search-angular-rxjs/
+## AngularFireAuth & AngularFireDatabase
+` auth.service.ts
+    isUser: Observable<boolean>;
+    isAdmin: Observable<boolean>;
 
-## Code scaffolding
+    constructor(public af: AngularFireAuth, public db: AngularFireDatabase) {
+        this.isUser = af.authState.map(state => !!state);
+        this.isAdmin = af.authState.switchMap(state => {
+            retrun db.object('admins/${state.uid}').map(data => !!data);
+        })
+    }
+`
+## OAuth 2 & OpenID Connect have a big fish to cook
+## refer to https://www.youtube.com/watch?v=996OiexHze0
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# the use of switchMap https://blog.angularindepth.com/when-to-use-switchmap-dfe84ac5a1ff
+*   concatMap could be used as a conservative choice;
+*   mergeMap should not be used — the ordering of the results is important;
+* 	switchMap could be used — when a new search is made, pending results are no longer needed;
+* 	exhaustMap should not be used — searches for new, partial addresses should not be ignored.
 
-## Build
+## problem 
+1. `compiler.js:1021 Uncaught Error: Template parse errors:
+Can't bind to 'ngModle' since it isn't a known property of 'input'. ("
+            placeholder="search" 
+            type="text" 
+            [ERROR ->][(ngModle)]="searchTerm"
+            [ngModleChange]="searchTerm">
+  </mat-form-field>`
+https://stackoverflow.com/questions/43298011/angular-4-cant-bind-to-ngmodel-since-it-isnt-a-known-property-of-input 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. `Can't bind to 'ngModelChange' since it isn't a known property of 'input'. ("
+            type="text" 
+            [(ngModel)]="searchTerm"
+            [ERROR ->][ngModelChange]=newSearch()>
+  </mat-form-field>`
 
-## Running unit tests
+3. Angular 6 change format as the following
+`
+import { interval } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+const result = interval(5000).pipe(
+        switchMap(() => this._authHttp.get(url)),    
+        map(res => res.results)
+       )
+`
+4. Angular 6/RxJS6 combining operators  https://blog.angularindepth.com/rxjs-combining-operators-397bad0628d0
+`
+client:168 ./src/app/app.component.ts
+Module not found: Error: Can't resolve 'rxjs/operators/debounceTime' in '/Users/Dad/code/angular6/autocomplete/instantSearch/src/app'
+` # coyotehill
