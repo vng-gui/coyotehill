@@ -1,13 +1,13 @@
-# InstantSearch
+## InstantSearch
 
-# source URL: https://youtu.be/aYurQaN3RoE
-# title: Angular and RxJS by Stephen Fluin
-# use 'https://reqres.in/api/users?page=2' simulate restful url until get github account crudential for 'https://api.github.com/search/repositories?g=${term}&sort=stars&order=desc'
-# role based application 
+1. source URL: https://youtu.be/aYurQaN3RoE
+2. title: Angular and RxJS by Stephen Fluin
+3. use 'https://reqres.in/api/users?page=2' simulate restful url until get github account crudential for 'https://api.github.com/search/repositories?g=${term}&sort=stars&order=desc'
+### role based application 
 
 
-## related real time search https://alligator.io/angular/real-time-search-angular-rxjs/
-## AngularFireAuth & AngularFireDatabase
+### related real time search https://alligator.io/angular/real-time-search-angular-rxjs/
+### AngularFireAuth & AngularFireDatabase
 ` auth.service.ts
     isUser: Observable<boolean>;
     isAdmin: Observable<boolean>;
@@ -19,10 +19,10 @@
         })
     }
 `
-## OAuth 2 & OpenID Connect have a big fish to cook
-## refer to https://www.youtube.com/watch?v=996OiexHze0
+### OAuth 2 & OpenID Connect have a big fish to cook
+### refer to https://www.youtube.com/watch?v=996OiexHze0
 
-# the use of switchMap https://blog.angularindepth.com/when-to-use-switchmap-dfe84ac5a1ff
+### the use of switchMap https://blog.angularindepth.com/when-to-use-switchmap-dfe84ac5a1ff
 *   concatMap could be used as a conservative choice;
 *   mergeMap should not be used — the ordering of the results is important;
 * 	switchMap could be used — when a new search is made, pending results are no longer needed;
