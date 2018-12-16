@@ -6,10 +6,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarterialModule } from './app.marterial.module';
 
 import { AppComponent } from './app.component';
+import { AlertButtonComponent } from './alert-button/alert-button.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AlertButtonComponent
   ],
   imports: [
     BrowserModule,

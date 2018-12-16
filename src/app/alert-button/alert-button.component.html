@@ -1,0 +1,13 @@
+<div class="content">
+  <h1>Alert Button</h1>
+  <article class="message is-warning" *ngIf='hideContent'>
+    <div class="message-header">
+      <p> Waring Code {{severity}}</p>
+    </div>
+    <div class="message-body">
+        <!-- <p> {{ content | async }}</p> -->
+        <p> {{ content }}</p>
+    </div>
+  </article>
+  <button (click)="toggle()">Toggle</button>
+</div>

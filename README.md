@@ -59,3 +59,10 @@ const result = interval(5000).pipe(
 client:168 ./src/app/app.component.ts
 Module not found: Error: Can't resolve 'rxjs/operators/debounceTime' in '/Users/Dad/code/angular6/autocomplete/instantSearch/src/app'
 ` # coyotehill
+
+5. install firebase for DB
+#       npm i firebase @angular/fire --save-dev
+
+6. install version-check for all module, after installation 
+#       version-check firebase
+
